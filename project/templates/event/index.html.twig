@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event List
+{% endblock %}
+
+{% block style %}
+	<style>
+		.level_container {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+		}
+	</style>
+{% endblock %}
+{% block body %}
+	<div class="level_container">
+		<a class="level" href="{{path('event.show' , {level:'B1'})}}">B1</a>
+		<a class="level" href="{{path('event.show' , {level:'B2'})}}">B2</a>
+		<a class="level" href="{{path('event.show' , {level:'B3'})}}">B3</a>
+	</div>
+{% endblock %}

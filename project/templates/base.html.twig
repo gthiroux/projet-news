@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block style %}
+			<style>
+				* {
+					margin: 0;
+					padding: 0;
+					list-style-type: none;
+				}
+				nav {
+					display: flex;
+					justify-content: space-around;
+					background: teal;
+					height: 3rem;
+				}
+				ul {
+					width: 100%;
+					display: flex;
+					justify-content: space-around;
+					align-items: center;
+				}
+				nav a {
+					color: white;
+				}
+			</style>
+		{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li><a class="navBar"href="{{path('home')}}">Home</a></li>
+				<li><a class="navBar"href="{{path('event.index')}}">Event</a></li>
+			</ul>
+		</nav>
+		{% block body %}{% endblock %}
+	</body>
 </html>

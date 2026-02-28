@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Cours
+	{{level}}
+{% endblock %}
+
+
+{% block body%}
+
+	<div>
+		{% for event in events %}
+			<p>{{event.name}}</p>
+			<p>{{event.teacher}}</p>
+		{% endfor %}
+	</div>
+{% endblock %}
