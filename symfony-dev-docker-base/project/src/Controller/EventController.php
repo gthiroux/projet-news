@@ -23,7 +23,7 @@ final class EventController extends AbstractController
     #[Route('/event/{level}', name: 'event.show')]
     public function show(string $level, EventRepository $repository): Response
     {
-        $events = $repository->findOneBy(['level' => $level]);
+        $events = $repository->findBy(['level' => $level]);
         return $this->render('event/show.html.twig', [
             'level' => $level,
             'events' => $events,
