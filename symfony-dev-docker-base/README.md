@@ -32,6 +32,9 @@ docker compose exec php composer require symfony/orm-pack
 ```bash
 docker compose exec php chown -R www-data:www-data var
 ```
+```bash
+docker compose exec php chown -R www-data:www-data /var/www && docker compose exec php chmod -R 775 /var/www
+```
 
 ## Accessing the Application
 
