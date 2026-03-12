@@ -21,7 +21,6 @@ final class Version20260227175535 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE event (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, teacher VARCHAR(255) NOT NULL, classroom VARCHAR(255) NOT NULL, level VARCHAR(255) NOT NULL, date DATE DEFAULT NULL, start TIME NOT NULL, finish TIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('DROP TABLE user');
     }
 
     public function down(Schema $schema): void

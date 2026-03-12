@@ -2,9 +2,11 @@
 
 {% block title %}Hello HomeController!
 {% endblock %}
-
+{% block stylesheet %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('style/home/index.css')}}">
+{% endblock %}
 {% block body %}
-	<div class="example-wrapper">
-		Welcome Home
-	</div>
+{% include "partials/flashes.html.twig" %}
+	{{form(eventForm)}}
 {% endblock %}

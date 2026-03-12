@@ -51,8 +51,8 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "1025:1025" # SMTP server
-      - "8025:8025" # Web interface
+      - "1026:1025" # SMTP server
+      - "8026:8025" # Web interface
     networks:
       - symfony
 
