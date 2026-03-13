@@ -17,17 +17,13 @@ final class HomeController extends AbstractController
     {   
         $event=new Event();
 
-        date_default_timezone_get();
-        $todayDate = date('Y-m-d h:i:s a', time());
-        $tomorrowDate = date('Y-m-d h:i:s a', time()+86400);
-
         $form=$this->createForm(EventType::class,$event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $em->persist($event);
             $em->flush();
-            $this->addFlash('sucess', 'Le cours a été ajouté');
-            // return $this->redirectToRoute('event.index');
+            // $this->addFlash('sucess', 'Le cours a été ajouté');
+            return $this->redirectToRoute('event.index');
         }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

@@ -29,37 +29,16 @@
 					
 				</tr>
 			</thead>
-		{% for event in events %}
+		{% for event in events | sortbyfield %}
 			{% if (event.date|date("d/m/Y"))==(today|date('d/m/Y'))%}
 			<tbody>
-				{% if event.level==='B1'%}
 				<tr>
-					<td>{{event.level}}</td>
+					<td>{{event.level|upper}}</td>
 					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
 					<td>{{event.name}}</td>
 					<td>{{event.teacher}}</td>
 					<td>{{event.classroom}}</td>
 				</tr>
-				{% endif %}
-				{% if event.level==='B2' %}
-				
-				<tr>
-					<td>{{event.level}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-				{% endif %}
-				{% if event.level==='B3' %}
-				<tr>
-					<td>{{event.level}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-				{% endif %}
 				</tbody>
 			{% endif %}
 				
@@ -82,34 +61,13 @@
 			</thead>
 		{% for event in events %}
 			{% if (event.date|date("d/m/Y"))==(tomorrow|date('d/m/Y'))%}
-				{% if event.level==='B1'%}
 				<tr>
-					<td>{{event.level}}</td>
+					<td>{{event.level|upper}}</td>
 					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
 					<td>{{event.name}}</td>
 					<td>{{event.teacher}}</td>
 					<td>{{event.classroom}}</td>
 				</tr>
-				{% endif %}
-				{% if event.level==='B2' %}
-				
-				<tr>
-					<td>{{event.level}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-				{% endif %}
-				{% if event.level==='B3' %}
-				<tr>
-					<td>{{event.level}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-				{% endif %}
 			{% endif %}
 				
 		{% endfor %}
