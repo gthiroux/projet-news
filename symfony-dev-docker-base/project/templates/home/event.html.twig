@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Création
+{% endblock %}
+{% block stylesheet %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('style/home/index.css')}}">
+{% endblock %}
+{% block body %}
+	{{form(eventForm)}}
+{% endblock %}

@@ -15,7 +15,7 @@
 	<div class="gallery">
 		{% for event in events %}
 
-		<div class="card_event">
+		<div class="card">
 			<p class="event_date">Le {{event.date|date("d/m/Y")}} de {{event.start|date('H:i')}} à {{event.finish|date('H:i')}} </p>
 			<h2 class ="event_name">{{event.name}}</h2>
 			<p class="event_teacher">Prof : {{event.teacher}}</p>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\EventRepository;
+use App\Repository\FuncfactRepository;
 use App\Entity\Event;
 use App\Form\EventType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,16 +15,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class EventController extends AbstractController
 {
     #[Route('/event', name: 'event.index')]
-    public function index(EventRepository $repository): Response
+    public function index(EventRepository $event_repository,FuncfactRepository $fact_repository): Response
     {
         date_default_timezone_get();
         $todayDate = date('Y-m-d h:i:s a', time());
         $tomorrowDate = date('Y-m-d h:i:s a', time()+86400);
-
-        $events = $repository->findAll();
+        $facts=$fact_repository->findAll();
+        $events = $event_repository->findAll();
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'events' => $events,
+            'facts'=>$facts,
             'today'=>$todayDate,
             'tomorrow'=>$tomorrowDate,
         ]);
