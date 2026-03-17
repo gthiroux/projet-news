@@ -5,9 +5,9 @@
 
 {% block stylesheet %}
 	{{ parent() }}
+	<link rel="stylesheet" href="{{asset('style/event/show.css')}}">
 	<link rel="stylesheet" href="{{asset('style/event/index.css')}}">
 
-	<link rel="stylesheet" href="{{asset('style/event/show.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -20,7 +20,6 @@
 		<h2>Cours du {{today|date("d/m/Y")}}</h2>
 			
 		<table class="event_tab">
-			
 			<thead>	
 				<tr> 
 					<th>Niveau Classe </th>
@@ -28,24 +27,32 @@
 					<th>Matière</th>
 					<th>Professeur</th>
 					<th>Salle de Cours</th>
+					<th>Supprimer</th>
+					
 					
 				</tr>
 			</thead>
-		{% for event in events %}
-			{% if (event.date|date("d/m/Y"))==(today|date('d/m/Y'))%}
-			<tbody>
-				<tr>
-					<td>{{event.level|upper}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-				</tbody>
-			{% endif %}
-				
-		{% endfor %}
+			{% for event in events %}
+				{% if (event.date|date("d/m/Y"))==(today|date('d/m/Y'))%}
+				<tbody>
+					<tr>
+						<td>{{event.level|upper}}</td>
+						<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
+						<td>{{event.name}}</td>
+						<td>{{event.teacher}}</td>
+						<td>{{event.classroom}}</td>
+						<td><form method="post" action="{{ path('event.delete', {id: event.id}) }}" onsubmit="return confirm('Tu es sûr ?');">
+                <button type="submit" class ="supp no-background">Supprimer</button>
+            </form></td>
+
+					</tr>
+					</tbody>
+				{% endif %}
+			{% endfor %}
 		</table>
+			{% if events|length ===0 %}
+		<p class='noEvent'>Pas de cours. Allez en créer un!</p>
+		{% endif %}
 	</div>
 	<div class="cours">
 		<h2>Cours du {{tomorrow|date("d/m/Y")}}</h2>
@@ -58,30 +65,59 @@
 					<th>Matière</th>
 					<th>Professeur</th>
 					<th>Salle de Cours</th>
+					<th>Supprimer</th>
 					
 				</tr>
 			</thead>
-		{% for event in events %}
-			{% if (event.date|date("d/m/Y"))==(tomorrow|date('d/m/Y'))%}
-				<tr>
-					<td>{{event.level|upper}}</td>
-					<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
-					<td>{{event.name}}</td>
-					<td>{{event.teacher}}</td>
-					<td>{{event.classroom}}</td>
-				</tr>
-			{% endif %}
-				
-		{% endfor %}
+			
+				{% for event in events %}
+					{% if (event.date|date("d/m/Y"))==(tomorrow|date('d/m/Y'))%}
+						<tr>
+							<td>{{event.level|upper}}</td>
+							<td>{{event.start|date('H:i')}}-{{event.finish|date('H:i')}}</td>
+							<td>{{event.name}}</td>
+							<td>{{event.teacher}}</td>
+							<td>{{event.classroom}}</td>
+							<td><form method="post" action="{{ path('event.delete', {id: event.id}) }}" onsubmit="return confirm('Tu es sûr ?');">
+                <button type="submit" class ="supp no-background">Supprimer</button>
+            </form></td>
+						</tr>
+					{% endif %}
+						
+				{% endfor %}
 		</table>
+		{% if events|length ===0 %}
+		<p class='noEvent'>Pas de cours. Allez en créer un!</p>
+		{% endif %}
 	</div>
 
 	<h2>Actus La Manu</h2>
 	<div class="gallery"> 
+	{% if facts|length ===0 %}
+		<p class='noEvent'>Pas d'actus à La Manu. Allez en créer un!</p>
+		{% endif %}
 	{% for fact in facts %}
 		<div class="card">
 		<h4>{{fact.title}}</h4>
 		<p>{{fact.description}}</p>
+		<form method="post" action="{{ path('event.funfact.delete', {id: fact.id}) }}" onsubmit="return confirm('Tu es sûr ?');">
+                <button type="submit" class="supp">Supprimer</button>
+            </form>
 		</div>
-	{% endfor %}</div>
+	{% endfor %}
+	
+	
+	</div>
+	<h2>Actus à Compiègne</h2>
+	<p>Nombre d'actu : {{actus.channel.item|length}}</p>
+	<div class="gallery"> 
+	{% for actu in actus.channel.item %}
+        <a href=" {{actu.link}} " target="_blank" class="card actu">
+            <p>Publie le
+                {{actu.pubDate|date("d M Y ")}}</p>
+            <h3 >{{actu.title|raw}}</h3>
+        </a>
+
+    {% endfor %}
+</div>
 {% endblock %}

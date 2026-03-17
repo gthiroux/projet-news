@@ -10,13 +10,18 @@
     list-style-type: none;
     box-sizing: border-box;
 }
-html,
+
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: auto;
     background: var(--light-color) !important;
 }
 nav {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     background: var(--dark-color);
@@ -33,6 +38,12 @@ nav a {
     font-weight: 800;
     color: var(--black);
 }
-h2 {
+h2,
+h1 {
     margin: 1rem;
+}
+h2 {
+    align-self: center;
+    text-decoration: underline;
+    margin-top: 2rem;
 }

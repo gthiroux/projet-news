@@ -10,6 +10,8 @@
 .cours {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 90%;
     height: auto;
     margin: 1rem;
@@ -33,4 +35,36 @@ td {
 td:nth-child(1) {
     color: var(--black);
     font-weight: 900;
+}
+
+.noEvent {
+    color: red;
+    align-self: center;
+}
+.gallery {
+    justify-content: center;
+    gap: 2rem;
+}
+.actu {
+    width: 40%;
+    margin: 2rem;
+}
+form {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.supp {
+    background-color: var(--light-color);
+    margin: 1rem;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 1rem;
+    border: none;
+    font-size: medium;
+    font-weight: 600;
+    color: var(--black);
+}
+.no-background {
+    background: var(--dark-color);
 }

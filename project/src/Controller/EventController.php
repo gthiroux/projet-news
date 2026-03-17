@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\EventRepository;
 use App\Repository\FuncfactRepository;
+use App\Entity\Funcfact;
 use App\Entity\Event;
 use App\Form\EventType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,12 +23,16 @@ final class EventController extends AbstractController
         $tomorrowDate = date('Y-m-d h:i:s a', time()+86400);
         $facts=$fact_repository->findAll();
         $events = $event_repository->findAll();
+
+        $compiegneActu = simplexml_load_file("https://www.agglo-compiegne.fr/rss/actualites"); 
+
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'events' => $events,
             'facts'=>$facts,
             'today'=>$todayDate,
             'tomorrow'=>$tomorrowDate,
+            'actus'=>$compiegneActu,
         ]);
     }
 
@@ -40,7 +45,23 @@ final class EventController extends AbstractController
             'events' => $events,
         ]);
     }
+    
+    #[Route("/{id}/delete-event", name: "event.delete", methods: ["POST"])]
+        public function deleteEvent(Event $event, EntityManagerInterface $em)
+    {
+    $em->remove($event);
+    $em->flush();
 
+    return $this->redirectToRoute("event.index");
+    }  
+    #[Route("/{id}/delete-funfact", name: "event.funfact.delete", methods: ["POST"])]
+        public function delete(Funcfact $fact, EntityManagerInterface $em)
+    {
+    $em->remove($fact);
+    $em->flush();
+
+    return $this->redirectToRoute("event.index");
+    }  
     // #[Route('/event/{level}/{id}/edit', name: 'event.edit')]
     // public function level(Event $event, Request $request,EntityManagerInterface $em): Response
     // {
