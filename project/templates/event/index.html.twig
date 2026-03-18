@@ -28,8 +28,6 @@
 					<th>Professeur</th>
 					<th>Salle de Cours</th>
 					<th>Supprimer</th>
-					
-					
 				</tr>
 			</thead>
 			{% for event in events %}
@@ -92,9 +90,11 @@
 	</div>
 
 	<h2>Actus La Manu</h2>
-	<div class="gallery"> 
+	<div class="gallery actu_gallery"> 
+	<div class="gallery_col">
+	<h3> Funfact</h3>
 	{% if facts|length ===0 %}
-		<p class='noEvent'>Pas d'actus à La Manu. Allez en créer un!</p>
+		<p class='noEvent'>Pas d'anecdote à La Manu. Allez en créer un!</p>
 		{% endif %}
 	{% for fact in facts %}
 		<div class="card">
@@ -105,16 +105,35 @@
             </form>
 		</div>
 	{% endfor %}
+	</div>
+	<div class="gallery_col">
+	<h3> Actualité à La Manu</h3>
+	<div class="gallery">
+	{% if actus|length ===0 %}
+		<p class='noEvent'>Pas d'actus à La Manu. Allez en créer un!</p>
+	{% endif %}
+	{% for actu in actus %}
+		<div class="card">
+		<p>{{actu.date|date("d/m/Y")}}</p>
+		<h4>{{actu.title}}</h4>
+		<p>{{actu.description}}</p>
+		<form method="post" action="{{ path('event.actu.delete', {id: actu.id}) }}" onsubmit="return confirm('Tu es sûr ?');">
+                <button type="submit" class="supp">Supprimer</button>
+            </form>
+		</div>
+	{% endfor %}
+	</div>
+	</div>
 	
 	
 	</div>
 	<h2>Actus à Compiègne</h2>
-	<p>Nombre d'actu : {{actus.channel.item|length}}</p>
+	<p>Nombre d'actu : {{actusCompiegne.channel.item|length}}</p>
 	<div class="gallery"> 
-	{% for actu in actus.channel.item %}
+	{% for actu in actusCompiegne.channel.item %}
         <a href=" {{actu.link}} " target="_blank" class="card actu">
             <p>Publie le
-                {{actu.pubDate|date("d M Y ")}}</p>
+                {{actu.pubDate|date("d/m/Y ")}}</p>
             <h3 >{{actu.title|raw}}</h3>
         </a>
 

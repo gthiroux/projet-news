@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Actu;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +16,8 @@ class ActuType extends AbstractType
             ->add('date')
             ->add('title')
             ->add('description')
+            ->add('save', SubmitType::class)
+
         ;
     }
 

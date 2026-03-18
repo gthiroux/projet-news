@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Repository\EventRepository;
 use App\Repository\FuncfactRepository;
+use App\Repository\ActuRepository;
 use App\Entity\Funcfact;
 use App\Entity\Event;
+use App\Entity\Actu;
 use App\Form\EventType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +18,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class EventController extends AbstractController
 {
     #[Route('/event', name: 'event.index')]
-    public function index(EventRepository $event_repository,FuncfactRepository $fact_repository): Response
+    public function index(EventRepository $event_repository,FuncfactRepository $fact_repository,ActuRepository $actu_repository): Response
     {
         date_default_timezone_get();
         $todayDate = date('Y-m-d h:i:s a', time());
         $tomorrowDate = date('Y-m-d h:i:s a', time()+86400);
+        
+        $actus=$actu_repository->findAll();
         $facts=$fact_repository->findAll();
         $events = $event_repository->findAll();
 
@@ -32,7 +36,8 @@ final class EventController extends AbstractController
             'facts'=>$facts,
             'today'=>$todayDate,
             'tomorrow'=>$tomorrowDate,
-            'actus'=>$compiegneActu,
+            'actusCompiegne'=>$compiegneActu,
+            'actus'=>$actus,
         ]);
     }
 
@@ -54,10 +59,21 @@ final class EventController extends AbstractController
 
     return $this->redirectToRoute("event.index");
     }  
+
+
     #[Route("/{id}/delete-funfact", name: "event.funfact.delete", methods: ["POST"])]
-        public function delete(Funcfact $fact, EntityManagerInterface $em)
+        public function deleteFunfact(Funcfact $fact, EntityManagerInterface $em)
     {
     $em->remove($fact);
+    $em->flush();
+
+    return $this->redirectToRoute("event.index");
+    }  
+
+    #[Route("/{id}/delete-actu", name: "event.actu.delete", methods: ["POST"])]
+        public function deleteActu(Actu $actu, EntityManagerInterface $em)
+    {
+    $em->remove($actu);
     $em->flush();
 
     return $this->redirectToRoute("event.index");

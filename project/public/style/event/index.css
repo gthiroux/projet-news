@@ -68,3 +68,12 @@ form {
 .no-background {
     background: var(--dark-color);
 }
+.actu_gallery {
+    flex-direction: column;
+}
+.gallery_col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

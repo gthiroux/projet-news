@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Actu;
 use App\Form\EventType;
 use App\Entity\Event;
 use App\Entity\Funcfact;
+use App\Form\ActuType;
 use App\Form\FunfactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,6 +42,19 @@ final class HomeController extends AbstractController
         return $this->render('home/event.html.twig', [
                     'eventForm'=>$form,
                 ]);}
+        if($formName=='create-actu'){
+            $actu=new Actu();
+
+            $form=$this->createForm(ActuType::class,$actu);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()){
+                $em->persist($actu);
+                $em->flush();
+                return $this->redirectToRoute('event.index');
+            }
+        return $this->render('home/event.html.twig', [
+                    'eventForm'=>$form,
+                ]);}
        else {
             $fact=new Funcfact();
 
@@ -48,7 +63,6 @@ final class HomeController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()){
                 $em->persist($fact);
                 $em->flush();
-                // $this->addFlash('sucess', 'Le cours a été ajouté');
                 return $this->redirectToRoute('event.index');
             }
         return $this->render('home/event.html.twig', [
