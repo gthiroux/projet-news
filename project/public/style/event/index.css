@@ -58,7 +58,6 @@ form {
     background-color: var(--light-color);
     margin: 1rem;
     padding: 1rem;
-    width: 100%;
     border-radius: 1rem;
     border: none;
     font-size: medium;
@@ -76,4 +75,7 @@ form {
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+.supp_btn {
+    margin: 0;
 }
